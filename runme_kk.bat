@@ -203,7 +203,15 @@ echo ---------------------------------------------------------
 
 ::del uninstallable app
 %adb% shell /data/local/tmp/su_client -c "rm -rf /system/earlyuninstallable"
-%adb% shell /data/local/tmp/su_client -c "rm -rf /system/apps/bootup"
+%adb% shell /data/local/tmp/su_client -c "rm /system/apps/bootup/LGDictionary.apk"
+%adb% shell /data/local/tmp/su_client -c "rm /system/apps/bootup/LGLW_Feather.apk"
+%adb% shell /data/local/tmp/su_client -c "rm /system/apps/bootup/LGLW_PolarBear.apk"
+%adb% shell /data/local/tmp/su_client -c "rm /system/apps/bootup/LGLW_Prince.apk"
+%adb% shell /data/local/tmp/su_client -c "rm /system/apps/bootup/LGLW_Seasonal.apk"
+%adb% shell /data/local/tmp/su_client -c "rm /system/apps/bootup/LGPolarisViewer.apk"
+%adb% shell /data/local/tmp/su_client -c "rm /system/apps/bootup/LGQTranslator.apk"
+%adb% shell /data/local/tmp/su_client -c "rm /system/apps/bootup/LGSmartWorld.apk"
+%adb% shell /data/local/tmp/su_client -c "rm /system/apps/bootup/LGWorldClockWidget.apk"
 
 
 %adb% shell /data/local/tmp/su_client -c "rm /system/bin/fssamond"
