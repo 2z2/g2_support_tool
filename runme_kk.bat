@@ -16,6 +16,7 @@ echo ---------------------------------------------------------
 %adb% push "%~dp0files\SuperSu\eu.chainfire.supersu-193.apk" /data/local/tmp/
 %adb% push "%~dp0files\tool\re.apk" /data/local/tmp/
 %adb% push "%~dp0files\tool\com.oasisfeng.greenify.apk" /data/local/tmp/
+%adb% push "%~dp0files\tool\xposed27.apk" /data/local/tmp/
 echo ---------------------------------------------------------
 echo push mod files 
 echo XHei.TTC pick up from http://bbs.themex.net/showthread.php?t=16851157 thanks a lot
@@ -61,8 +62,6 @@ echo ---------------------------------------------------------
 %adb% shell /data/local/tmp/su_client -c "rm /system/priv-app/auoneidsetting.odex"
 %adb% shell /data/local/tmp/su_client -c "rm /system/priv-app/Cmail.apk"
 %adb% shell /data/local/tmp/su_client -c "rm /system/priv-app/Cmail.odex"
-%adb% shell /data/local/tmp/su_client -c "rm /system/priv-app/com.kddi.android.email_ver401007.apk"
-%adb% shell /data/local/tmp/su_client -c "rm /system/priv-app/com.kddi.android.email_ver401007.odex"
 %adb% shell /data/local/tmp/su_client -c "rm /system/priv-app/ConditionRecorder_signed_noicon_ANDROID_321900549_20140319.apk"
 %adb% shell /data/local/tmp/su_client -c "rm /system/priv-app/DeviceManager3LM-biwa-k.1.2.10-signed-aligned.apk"
 %adb% shell /data/local/tmp/su_client -c "rm /system/priv-app/disasterapp_05.11.29.apk"
@@ -97,6 +96,9 @@ echo ---------------------------------------------------------
 %adb% shell /data/local/tmp/su_client -c "rm /system/priv-app/Velvet.odex"
 %adb% shell /data/local/tmp/su_client -c "rm /system/priv-app/WallpaperCropper.apk"
 %adb% shell /data/local/tmp/su_client -c "rm /system/priv-app/WallpaperCropper.odex"
+%adb% shell /data/local/tmp/su_client -c "rm /system/priv-app/com.kddi.android.email_ver401013.apk"
+%adb% shell /data/local/tmp/su_client -c "rm /system/priv-app/com.kddi.android.email_ver401013.odex"
+
 
 
 :: del
@@ -200,6 +202,8 @@ echo ---------------------------------------------------------
 %adb% shell /data/local/tmp/su_client -c "rm /system/app/utapass_2.03.09_LG_pre-install.apk"
 %adb% shell /data/local/tmp/su_client -c "rm /system/app/LGPCSuiteUI.apk"
 %adb% shell /data/local/tmp/su_client -c "rm /system/app/LGPCSuiteUI.odex"
+%adb% shell /data/local/tmp/su_client -c "rm /system/app/EasySettingWizard_040008.apk"
+
 
 ::del uninstallable app
 %adb% shell /data/local/tmp/su_client -c "rm -rf /system/earlyuninstallable"
@@ -212,6 +216,7 @@ echo ---------------------------------------------------------
 %adb% shell /data/local/tmp/su_client -c "rm /system/apps/bootup/LGQTranslator.apk"
 %adb% shell /data/local/tmp/su_client -c "rm /system/apps/bootup/LGSmartWorld.apk"
 %adb% shell /data/local/tmp/su_client -c "rm /system/apps/bootup/LGWorldClockWidget.apk"
+
 
 
 %adb% shell /data/local/tmp/su_client -c "rm /system/bin/fssamond"
@@ -248,6 +253,8 @@ echo ---------------------------------------------------------
 echo apply mod to system folder
 echo ---------------------------------------------------------
 %adb% shell /data/local/tmp/su_client -c "cp -r /data/local/tmp/cpsystem/* /system/"
+%adb% shell /data/local/tmp/su_client -c "cp -f /data/local/tmp/cpsystem/bin/app_process /system/bin/app_process"
+
 echo ---------------------------------------------------------
 echo mod permissions
 echo ---------------------------------------------------------
@@ -271,6 +278,8 @@ echo apply and mod permissions featureset(LGMessage) done!
 echo apply and mod permissions framework-res done!
 %adb% shell /data/local/tmp/su_client -c "chmod 644 /system/priv-app/LGMessage.apk"
 echo apply and mod permissions LGMessage done!
+%adb% shell /data/local/tmp/su_client -c "chmod 755 /system/bin/app_process"
+echo apply and mod permissions xposed app_process done!
 echo begin mod fonts
 %adb% shell /data/local/tmp/su_client -c "chmod 644 /system/etc/system_fonts.xml"
 %adb% shell /data/local/tmp/su_client -c "chmod 644 /system/fonts/DroidSansFallback.ttf"
@@ -285,6 +294,22 @@ echo fonts modfied
 %adb% shell /data/local/tmp/su_client -c "pm install /data/local/tmp/eu.chainfire.supersu-193.apk"
 %adb% shell /data/local/tmp/su_client -c "pm install /data/local/tmp/re.apk"
 %adb% shell /data/local/tmp/su_client -c "pm install /data/local/tmp/com.oasisfeng.greenify.apk"
+%adb% shell /data/local/tmp/su_client -c "pm install /data/local/tmp/xposed27.apk"
+
+
+echo begin install xposed jar files
+%adb% shell /data/local/tmp/su_client -c "/data/local/tmp/busybox_file mount -o rw,remount /data"
+::%adb% shell /data/local/tmp/su_client -c "mkdir /data/data/de.robv.android.xposed.installer"
+::%adb% shell /data/local/tmp/su_client -c "chmod 751 /data/data/de.robv.android.xposed.installer"
+%adb% shell /data/local/tmp/su_client -c "mkdir /data/data/de.robv.android.xposed.installer/bin"
+%adb% shell /data/local/tmp/su_client -c "chmod 771 /data/data/de.robv.android.xposed.installer/bin"
+
+
+%adb% shell /data/local/tmp/su_client -c "cp -r /data/local/tmp/cpdata/* /data/data/de.robv.android.xposed.installer/bin/"
+%adb% shell /data/local/tmp/su_client -c "chmod 644 /data/data/de.robv.android.xposed.installer/bin/XposedBridge.jar"
+echo begin install xposed jar files done
+%adb% shell /data/local/tmp/su_client -c "/data/local/tmp/busybox_file mount -o ro,remount /data"
+
 
 
 type %doc%\"05_reboot.txt"

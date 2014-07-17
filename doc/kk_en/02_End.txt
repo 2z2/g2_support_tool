@@ -4,4 +4,5 @@
 * BlackMagic version by yinxingren(chinese)
 * Contact me at i@peeg.org
 * download from http://www.lgisai.com
+* current BlackMagic vs is v2.5 with xposed
 * =========================================
